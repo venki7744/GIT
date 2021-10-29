@@ -1,0 +1,2 @@
+paho_mqtt==1.6.1
+PyJWT==2.3.0
