@@ -1,0 +1,31 @@
+{
+  "name": "Streaming template to load data from PubSub to GCS",
+  "description": "Streaming template to load data from PubSub to GCS.",
+  "parameters": [
+    {
+      "name": "input_topic",
+      "label": "Input PubSub Topic.",
+      "helpText": "Name of the input PubSub topic to consume from."
+    },
+    {
+      "name": "input_subscription",
+      "label": "Input PubSub Subscription.",
+      "helpText": "Name of the input PubSub Subscription to consume from."
+    },
+    {
+      "name": "window_size",
+      "label": "Data Processing Windo Size (Minutes).",
+      "helpText": "Fixed Window in minutes based on which data from PubSub would be collected into GCS."
+    },
+    {
+      "name": "output_path",
+      "label": "Output path where the data would be stored.",
+      "helpText": "Output path with file prefix. This would be used as a pattern to store data."
+    },
+    {
+      "name": "num_shards",
+      "label": "No of Shards created per Window.",
+      "helpText": "Number of shards created per Window."
+    }
+  ]
+}

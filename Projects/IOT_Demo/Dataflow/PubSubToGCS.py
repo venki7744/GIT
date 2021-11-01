@@ -79,7 +79,7 @@ class WriteToGCS(DoFn):
                 f.write(f"{message_body},{publish_time}\n".encode("utf-8"))
 
 
-def run(input_topic, output_path, window_size=1.0, num_shards=5, pipeline_args=None):
+def run(input_topic, input_subscription, output_path, window_size=1.0, num_shards=5, pipeline_args=None):
     # Set `save_main_session` to True so DoFns can access globally imported modules.
     pipeline_options = PipelineOptions(
         pipeline_args, streaming=True, save_main_session=True
@@ -92,7 +92,7 @@ def run(input_topic, output_path, window_size=1.0, num_shards=5, pipeline_args=N
             # binds the publish time returned by the Pub/Sub server for each message
             # to the element's timestamp parameter, accessible via `DoFn.TimestampParam`.
             # https://beam.apache.org/releases/pydoc/current/apache_beam.io.gcp.pubsub.html#apache_beam.io.gcp.pubsub.ReadFromPubSub
-            | "Read from Pub/Sub" >> io.ReadFromPubSub(topic=input_topic)
+            | "Read from Pub/Sub" >> io.ReadFromPubSub(topic=input_topic, subscription=input_subscription)
             | "Window into" >> GroupMessagesByFixedWindows(window_size, num_shards)
             | "Write to GCS" >> ParDo(WriteToGCS(output_path))
         )
@@ -106,6 +106,11 @@ if __name__ == "__main__":
         "--input_topic",
         help="The Cloud Pub/Sub topic to read from."
         '"projects/<PROJECT_ID>/topics/<TOPIC_ID>".',
+    )
+    parser.add_argument(
+        "--input_subscription",
+        help="The Cloud Pub/Sub subscription to read from."
+        '"projects/<PROJECT_ID>/subscriptions/<subscription_ID>".',
     )
     parser.add_argument(
         "--window_size",
@@ -127,6 +132,7 @@ if __name__ == "__main__":
 
     run(
         known_args.input_topic,
+        known_args.input_subscription,
         known_args.output_path,
         known_args.window_size,
         known_args.num_shards,
