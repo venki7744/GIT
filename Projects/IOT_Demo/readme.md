@@ -17,5 +17,7 @@ For Generating public/Private key use the following command (user Name not used 
  * [IOT Core Quick start](https://cloud.google.com/iot/docs/quickstart)
  * [GCP github Examples](https://github.com/GoogleCloudPlatform/python-docs-samples/tree/master/iot/api-client)
   
- ToDo:
-  Include example Dataflow job to process the data and land into GCS bucket.
+ The repo also contains Dataflow flex-template to process streaming data.
+ Reference:
+ * [Dataflow Flex Template](https://cloud.google.com/dataflow/docs/guides/templates/using-flex-templates)
+ * [Quick Start Docker Build](https://cloud.google.com/build/docs/quickstart-build#build_using_dockerfile)
