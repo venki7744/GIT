@@ -1,3 +1,6 @@
 Projects/IOT_Demo/certificates - local/**
+Projects/IOT_Demo/Dataflow/noxfile.py
+Projects/IOT_Demo/Dataflow/PubSubToGCS_test.py
+Projects/IOT_Demo/Dataflow/requirements-test.py
 #Projects/IOT_Demo/certificates - local/rsa_cert.pem
 #Projects/IOT_Demo/certificates - local/rsa_private.pem
