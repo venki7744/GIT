@@ -5,15 +5,15 @@ Simplified steps:
 
 1. Define Variables:
 
-'''export TEMPLATE_PATH="gs://<GCS Bucket>/templates/pubsubtogcs.json"
-export TEMPLATE_IMAGE="<REGION>-docker.pkg.dev/<PROJECT ID>/<REPO>/pubsubtogcs-image:latest"
-export REGION="<REGION>"
-export PROJECT="<PROJECT ID>"
-export REPO="<REPO>"
-export TOPIC="<IOT TOPIC>"
-export SUBSCRIPTION="<SUBSCRIPTION ON IOT TOPIC>"
-export ROOTFOLDER="<GCS BUCKET>"
-export OUTFOLDER="<OUTPUT BUCKET PATH>"'''
+'''export TEMPLATE_PATH="gs://venki-dataflow/templates/pubsubtogcs.json"
+export TEMPLATE_IMAGE="europe-west1-docker.pkg.dev/training-project-327506/venki-docker-repo/pubsubtogcs-image:latest"
+export REGION="europe-west1"
+export PROJECT="training-project-327506"
+export REPO="venki-docker-repo"
+export TOPIC="venki_iot_topic"
+export SUBSCRIPTION="venki_iot_topic_sub_dataflow"
+export ROOTFOLDER="venki-dataflow"
+export OUTFOLDER="venki-dataflow/streaming/output"'''
 
 2. Create artifact repo:
 
