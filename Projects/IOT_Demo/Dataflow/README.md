@@ -22,7 +22,7 @@ export OUTFOLDER="<OUTPUT BUCKET PATH>"
 ```
 gcloud artifacts repositories create $REPO --repository-format=docker \
     --location=$REGION --description="docker-repo"
-    ```
+```
 
 3. Copy contents in Dataflow folder to home:
 
