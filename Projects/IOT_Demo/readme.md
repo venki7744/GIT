@@ -1,16 +1,62 @@
 # GCP_IOT_Demo
 This is just a copy of code from GCP IOT Demo (https://github.com/GoogleCloudPlatform/python-docs-samples/tree/master/iot/api-client/end_to_end_example) with some minor tweaks:
-Usage:
+
+Quick and simple steps:
+
+In a cloud shell, perform the following:
+
+1. Declare few variables:
 
 ```
-python "cloudiot_pubsub_example_mqtt_device.py" --project_id "<Project_id>" --registry_id "<GCTP IOT Core Registry ID>" --device_id "<GCP IOT Core Device ID>" --private_key_file "<Path (rel/abs) where rsa_private.pem is located>"  --algorithm "RS256" --cloud_region "<Region>" --ca_certs "<Path (rel/abs) where roots.pem is located>" --num_messages 10 --mqtt_bridge_hostname "mqtt.googleapis.com" --mqtt_bridge_port 8883 --jwt_timeout_minutes <JWT timeout minutes (60 default)> --message_type "event"
+  export TOPIC="myTopic"
+  export REGISTRY="myRegistry"
+  export PROJECTID="Project ID"
+  export REGION="region"
+  export DEVICE="myDevice"
 ```
-  
-For Generating public/Private key use the following command (user Name not used in IOT Core):
-  
+
+2. Create a Pub/Sub topic for receving IOT messages:
+
+```
+  gcloud pubsub topics create $TOPIC --project $PROJECTID
+```
+
+3. Generate public/Private keys:
+
 ```
   openssl req -x509 -newkey rsa:2048 -keyout rsa_private.pem -nodes \
     -out rsa_cert.pem -subj "/CN=unused"
+```
+
+4. Create a Device registry:
+
+```
+  gcloud iot registries create $REGISTRY \
+      --project=$PROJECTID \
+      --region=$REGION \
+      --enable-mqtt-config \
+      --enable-http-config \
+      --event-notification-config=topic=projects/$PROJECTID/topics/$TOPIC
+```
+
+5. Add device to Registry:
+
+```
+  gcloud iot devices create $DEVICE \
+    --project=$PROJECID \
+    --region=$REGION \
+    --registry=$REGISTRY \
+    --public-key path=rsa_cert.pem,type=rsa-x509-pem
+```
+
+6. Download CA certificate from [CA Certificate](https://pki.goog/roots.pem) to certificates folder (local).
+
+7. Download private key generated (rsa_private.pem) to the certicates folder (local).
+
+8. Run the following locally:
+
+```
+python "cloudiot_pubsub_example_mqtt_device.py" --project_id "<Project_id>" --registry_id "<GCTP IOT Core Registry ID>" --device_id "<GCP IOT Core Device ID>" --private_key_file "<Path (rel/abs) where rsa_private.pem is located>"  --algorithm "RS256" --cloud_region "<Region>" --ca_certs "<Path (rel/abs) where roots.pem is located>" --num_messages <Number of messages> --mqtt_bridge_hostname "mqtt.googleapis.com" --mqtt_bridge_port 8883 --jwt_timeout_minutes <JWT timeout minutes (60 default)> --message_type "event"
 ```
   
  References:
