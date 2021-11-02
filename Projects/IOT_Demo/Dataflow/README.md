@@ -64,3 +64,21 @@ gcloud dataflow flex-template run "pubsubtogcs-`date +%Y%m%d-%H%M%S`" \
     --parameters output_path="gs://$OUTFOLDER/file-" \
     --parameters num_shards=5
 ```
+
+8. (Optional) Running with dataflow-prime enabled (need to enable Cloud Autoscale API):
+
+```
+gcloud dataflow flex-template run "pubsubtogcs-`date +%Y%m%d-%H%M%S`" \
+    --template-file-gcs-location "$TEMPLATE_PATH" \
+    --max-workers=1 \
+    --region=europe-west1 \
+    --staging-location="gs://$ROOTFOLDER/staging" \
+    --temp-location="gs://$ROOTFOLDER/temp" \
+    --dataflow_service_options=enable_prime \
+    --region "$REGION" \
+    --parameters input_topic="projects/$PROJECT/topics/$TOPIC" \
+    --parameters input_subscription="projects/$PROJECT/subscriptions/$SUBSCRIPTION" \
+    --parameters window_size=1 \
+    --parameters output_path="gs://$OUTFOLDER/file-" \
+    --parameters num_shards=5
+```
