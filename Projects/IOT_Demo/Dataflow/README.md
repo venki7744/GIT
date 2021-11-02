@@ -58,7 +58,6 @@ gcloud dataflow flex-template run "pubsubtogcs-`date +%Y%m%d-%H%M%S`" \
     --temp-location="gs://$ROOTFOLDER/temp" \
     --worker-machine-type='n1-standard-2' \
     --region "$REGION" \
-    --parameters input_topic="projects/$PROJECT/topics/$TOPIC" \
     --parameters input_subscription="projects/$PROJECT/subscriptions/$SUBSCRIPTION" \
     --parameters window_size=1 \
     --parameters output_path="gs://$OUTFOLDER/file-" \
@@ -74,9 +73,8 @@ gcloud dataflow flex-template run "pubsubtogcs-`date +%Y%m%d-%H%M%S`" \
     --region=europe-west1 \
     --staging-location="gs://$ROOTFOLDER/staging" \
     --temp-location="gs://$ROOTFOLDER/temp" \
-    --dataflow_service_options=enable_prime \
+    --additional-experiments=enable_prime \
     --region "$REGION" \
-    --parameters input_topic="projects/$PROJECT/topics/$TOPIC" \
     --parameters input_subscription="projects/$PROJECT/subscriptions/$SUBSCRIPTION" \
     --parameters window_size=1 \
     --parameters output_path="gs://$OUTFOLDER/file-" \

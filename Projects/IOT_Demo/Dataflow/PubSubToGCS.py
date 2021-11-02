@@ -103,11 +103,6 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--input_topic",
-        help="The Cloud Pub/Sub topic to read from."
-        '"projects/<PROJECT_ID>/topics/<TOPIC_ID>".',
-    )
-    parser.add_argument(
         "--input_subscription",
         help="The Cloud Pub/Sub subscription to read from."
         '"projects/<PROJECT_ID>/subscriptions/<subscription_ID>".',

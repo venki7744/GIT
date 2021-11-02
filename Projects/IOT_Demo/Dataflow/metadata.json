@@ -3,11 +3,6 @@
   "description": "Streaming template to load data from PubSub to GCS.",
   "parameters": [
     {
-      "name": "input_topic",
-      "label": "Input PubSub Topic.",
-      "helpText": "Name of the input PubSub topic to consume from."
-    },
-    {
       "name": "input_subscription",
       "label": "Input PubSub Subscription.",
       "helpText": "Name of the input PubSub Subscription to consume from."
