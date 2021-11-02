@@ -9,16 +9,16 @@ In a cloud shell, perform the following:
 
 ```
   export TOPIC="myTopic"
-  export REGISTRY="myRegistry"
-  export PROJECTID="Project ID"
+  export REGISTRY="venki_iot_20211028"
+  export PROJECT="Project ID"
   export REGION="region"
-  export DEVICE="myDevice"
+  export DEVICE="venki_iot_device_20211028"
 ```
 
 2. Create a Pub/Sub topic for receving IOT messages:
 
 ```
-  gcloud pubsub topics create $TOPIC --project $PROJECTID
+  gcloud pubsub topics create $TOPIC
 ```
 
 3. Generate public/Private keys:
@@ -32,18 +32,18 @@ In a cloud shell, perform the following:
 
 ```
   gcloud iot registries create $REGISTRY \
-      --project=$PROJECTID \
+      --project=$PROJECT \
       --region=$REGION \
       --enable-mqtt-config \
       --enable-http-config \
-      --event-notification-config=topic=projects/$PROJECTID/topics/$TOPIC
+      --event-notification-config=topic=projects/$PROJECT/topics/$TOPIC
 ```
 
 5. Add device to Registry:
 
 ```
   gcloud iot devices create $DEVICE \
-    --project=$PROJECID \
+    --project=$PROJECT \
     --region=$REGION \
     --registry=$REGISTRY \
     --public-key path=rsa_cert.pem,type=rsa-x509-pem
