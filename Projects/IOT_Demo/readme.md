@@ -8,10 +8,10 @@ In a cloud shell, perform the following:
 1. Declare few variables:
 
 ```
-  export TOPIC="myTopic"
+  export TOPIC="venki_iot_topic"
   export REGISTRY="venki_iot_20211028"
-  export PROJECT="Project ID"
-  export REGION="region"
+  export PROJECT="training-project-327506"
+  export REGION="europe-west1"
   export DEVICE="venki_iot_device_20211028"
 ```
 
